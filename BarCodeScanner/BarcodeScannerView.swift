@@ -12,12 +12,12 @@ struct BarcodeScannerView: View {
         NavigationView{
             VStack{
                 Spacer()
-                
-                Rectangle().frame(maxWidth: .infinity,maxHeight: 200).border(Color.black)
+                //TODO: Rectagle camera placeholder
+                Rectangle().frame(maxWidth: .infinity,maxHeight: 300).border(Color.black)
                 Spacer()
                 
                 Button(action: {
-                    // Action to perform when the button is tapped
+                    // TODO: Action to perform when the button is tapped
                 }) {
                     HStack {
                         Image(systemName: "barcode.viewfinder")
