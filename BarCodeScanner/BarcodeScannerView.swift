@@ -11,9 +11,12 @@ struct BarcodeScannerView: View {
     var body: some View {
         NavigationView{
             VStack{
+                
                 Spacer()
+                
                 //TODO: Rectagle camera placeholder
                 Rectangle().frame(maxWidth: .infinity,maxHeight: 300).border(Color.black)
+                
                 Spacer()
                 
                 Button(action: {
@@ -46,8 +49,10 @@ struct scanButton: View {
             Text("Scan Barcode")
         }
     }
-    
 }
+
+
+
 
 #Preview {
     BarcodeScannerView()
