@@ -54,13 +54,48 @@ final class ScannerViewController: UIViewController {
         if captureSession.canAddOutput(metaDataOutput) {
             captureSession.addOutput(metaDataOutput)
             metaDataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            // Array of Barcode Types to scan:  = 8 digit,13 digit -Barcodes
+            metaDataOutput.metadataObjectTypes = [.ean8,.ean13]
         } else {
             print("Could not add metadata output to the session.")
             return
         }
+        
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        
+        guard let previewLayer = previewLayer else {
+            print("previewLayer is nil")
+            return
+        }
+        // Indicates how the layer displays video content within its bounds.
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+        
+        captureSession.startRunning()
+
     }
-    
 }
 
 extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
+    // Delegate method called when a new metadata object is detected
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        // Check if there's at least one detected metadata object
+        guard let object = metadataObjects.first else {
+            return
+        }
+        
+        // Attempt to cast the first metadata object to a machine-readable code object
+        guard let machineReadableObject = object as? AVMetadataMachineReadableCodeObject else {
+            return
+        }
+        
+        // Get the barcode's string value if available
+        guard let barcode = machineReadableObject.stringValue else {
+            return
+        }
+        
+        // Notify the delegate with the detected barcode
+        scannerDelagate?.didFind(barcode: barcode)
+    }
 }
+
