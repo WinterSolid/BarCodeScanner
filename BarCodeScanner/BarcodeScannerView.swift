@@ -14,7 +14,7 @@ struct BarcodeScannerView: View {
                 
                 Spacer()
                 
-                //TODO: Rectagle camera placeholder
+                //TODO: Rectagle (camera placeholder)
                 Rectangle().frame(maxWidth: .infinity,maxHeight: 300).border(Color.black)
                 
                 Spacer()

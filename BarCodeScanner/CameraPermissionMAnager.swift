@@ -26,6 +26,7 @@ class CameraPermissionManager: ObservableObject {
         case .denied, .restricted:
             // Permission denied or restricted
             print("Camera access denied or restricted.")
+        // @unknown default ensures forward-compatible.
         @unknown default:
             print("Unknown camera authorization status.")
         }
