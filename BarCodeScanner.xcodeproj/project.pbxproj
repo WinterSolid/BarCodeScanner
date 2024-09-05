@@ -11,6 +11,7 @@
 		3A780E7C2C88F9D800FE7BF1 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A780E7B2C88F9D800FE7BF1 /* BarcodeScannerView.swift */; };
 		3A780E7E2C88F9DA00FE7BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A780E7D2C88F9DA00FE7BF1 /* Assets.xcassets */; };
 		3A780E812C88F9DA00FE7BF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A780E802C88F9DA00FE7BF1 /* Preview Assets.xcassets */; };
+		3A9C52F22C8A480900DC775A /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C52F12C8A480900DC775A /* ScannerViewController.swift */; };
 		3AFE117E2C8930F000E30A21 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE117D2C8930F000E30A21 /* BarcodeView.swift */; };
 		3AFE11822C89337800E30A21 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE11812C89337800E30A21 /* CameraPermissionManager.swift */; };
 /* End PBXBuildFile section */
@@ -21,6 +22,7 @@
 		3A780E7B2C88F9D800FE7BF1 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		3A780E7D2C88F9DA00FE7BF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A780E802C88F9DA00FE7BF1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3A9C52F12C8A480900DC775A /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		3AFE117D2C8930F000E30A21 /* BarcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
 		3AFE11812C89337800E30A21 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +59,7 @@
 			children = (
 				3A780E792C88F9D800FE7BF1 /* BarCodeScannerApp.swift */,
 				3AFE117D2C8930F000E30A21 /* BarcodeView.swift */,
+				3A9C52F12C8A480900DC775A /* ScannerViewController.swift */,
 				3AFE11812C89337800E30A21 /* CameraPermissionManager.swift */,
 				3A780E7B2C88F9D800FE7BF1 /* BarcodeScannerView.swift */,
 				3A780E7D2C88F9DA00FE7BF1 /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 				3A780E7C2C88F9D800FE7BF1 /* BarcodeScannerView.swift in Sources */,
 				3AFE11822C89337800E30A21 /* CameraPermissionManager.swift in Sources */,
 				3A780E7A2C88F9D800FE7BF1 /* BarCodeScannerApp.swift in Sources */,
+				3A9C52F22C8A480900DC775A /* ScannerViewController.swift in Sources */,
 				3AFE117E2C8930F000E30A21 /* BarcodeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
