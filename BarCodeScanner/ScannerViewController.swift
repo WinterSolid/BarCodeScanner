@@ -8,7 +8,6 @@
 import UIKit
 import AVFoundation
 
-//
 protocol ScannerViewControllerDelegate: AnyObject {
     func didFind(barcode: String)
     func didSurface(error: ScannerError)
@@ -39,10 +38,9 @@ final class ScannerViewController: UIViewController {
         
         guard let previewLayer = previewLayer else {
             scannerDelegate?.didSurface(error: .invalidDeviceInput)
-            return
+            return print("Error: No camera detected.")
         }
         previewLayer.frame = view.layer.bounds
-        
     }
     
     private func setupCaptureSession() {
@@ -90,7 +88,7 @@ final class ScannerViewController: UIViewController {
         view.layer.addSublayer(previewLayer)
         
         captureSession.startRunning()
-
+        
     }
 }
 
@@ -140,5 +138,3 @@ private func handleError(_ error: BarcodeScanningError) {
 enum ScannerError: Error {
     case invalidDeviceInput
 }
-
-
