@@ -17,6 +17,8 @@ struct BarcodeScannerView: View {
                 //TODO: Rectagle (camera placeholder)
                 Rectangle().frame(maxWidth: .infinity,maxHeight: 300).border(Color.black)
                 
+                Text("Awaiting Scan").font(.title).foregroundColor(Color.red).padding(20)
+                
                 Spacer()
                 
                 Button(action: {
@@ -32,8 +34,6 @@ struct BarcodeScannerView: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
                 }
-                
-                Text("Not Scanned").font(.title).foregroundColor(Color.red).padding()
                 Spacer()
             }
             .navigationTitle("Barcode Scanner")

@@ -11,22 +11,40 @@ import AVFoundation
 //
 protocol ScannerViewControllerDelegate: AnyObject {
     func didFind(barcode: String)
+    func didSurface(error: ScannerError)
 }
 
 final class ScannerViewController: UIViewController {
     // Capture whats on camera
     let captureSession = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer?
-    weak var scannerDelagate: ScannerViewControllerDelegate!
+    weak var scannerDelegate: ScannerViewControllerDelegate!
     
-    init(scannerDelagate: ScannerViewControllerDelegate){
+    init(scannerDelegate: ScannerViewControllerDelegate){
         super.init(nibName: nil, bundle: nil)
-        self.scannerDelagate = scannerDelagate
+        self.scannerDelegate = scannerDelegate
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCaptureSession()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        guard let previewLayer = previewLayer else {
+            scannerDelegate?.didSurface(error: .invalidDeviceInput)
+            return
+        }
+        previewLayer.frame = view.layer.bounds
+        
+    }
+    
     private func setupCaptureSession() {
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
             print("Failed to get the default video capture device.")
@@ -77,25 +95,50 @@ final class ScannerViewController: UIViewController {
 }
 
 extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
-    // Delegate method called when a new metadata object is detected
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        // Check if there's at least one detected metadata object
+        // Error if no metadata objects are detected
         guard let object = metadataObjects.first else {
+            handleError(BarcodeScanningError.noMetadataObject)
             return
         }
         
-        // Attempt to cast the first metadata object to a machine-readable code object
+        // Error if the detected object is not machine-readable
         guard let machineReadableObject = object as? AVMetadataMachineReadableCodeObject else {
+            handleError(BarcodeScanningError.nonMachineReadableObject)
             return
         }
         
-        // Get the barcode's string value if available
+        // Error if no barcode value is found
         guard let barcode = machineReadableObject.stringValue else {
+            handleError(BarcodeScanningError.noBarcodeValue)
             return
         }
         
         // Notify the delegate with the detected barcode
-        scannerDelagate?.didFind(barcode: barcode)
+        scannerDelegate?.didFind(barcode: barcode)
     }
 }
+// MARK: ERROR HANDLING
+// Error enum for barcode scanning
+enum BarcodeScanningError: Error {
+    case noMetadataObject
+    case nonMachineReadableObject
+    case noBarcodeValue
+}
+// Helper function to handle errors
+private func handleError(_ error: BarcodeScanningError) {
+    switch error {
+    case .noMetadataObject:
+        print("Error: No metadata object detected.")
+    case .nonMachineReadableObject:
+        print("Error: Detected object is not a machine-readable code.")
+    case .noBarcodeValue:
+        print("Error: No barcode value found.")
+    }
+}
+
+enum ScannerError: Error {
+    case invalidDeviceInput
+}
+
 
